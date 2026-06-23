@@ -1,0 +1,12 @@
+**/.venv
+**/venv
+**/__pycache__
+**/.pytest_cache
+**/node_modules
+frontend/dist
+.git
+.idea
+.vscode
+**/.env
+*.md
+terminals
