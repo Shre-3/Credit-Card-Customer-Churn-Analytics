@@ -4,13 +4,22 @@ A full-stack analytics application that helps a bank identify customers at risk 
 
 ## Tech Stack
 
-**Backend:** Python · FastAPI · SQLAlchemy · PostgreSQL · Pydantic
+![Python](https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-009688?logo=fastapi&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&logoColor=white)
 
-**Machine Learning:** Pandas · Numpy · Scikit-Learn · XGBoost · SHAP
+![Pandas](https://img.shields.io/badge/Pandas-150458?logo=pandas&logoColor=white)
+![NumPy](https://img.shields.io/badge/NumPy-013243?logo=numpy&logoColor=white)
+![Scikit--Learn](https://img.shields.io/badge/Scikit--Learn-F7931E?logo=scikitlearn&logoColor=white)
+![XGBoost](https://img.shields.io/badge/XGBoost-1A1A1A?logo=xgboost&logoColor=white)
+![SHAP](https://img.shields.io/badge/SHAP-FF6B6B?logo=python&logoColor=white)
 
-**Frontend:** React · Vite · Tailwind CSS · Plotly.js
+![React](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=black)
+![Vite](https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?logo=tailwindcss&logoColor=white)
+![Plotly](https://img.shields.io/badge/Plotly-3D4F71?logo=plotly&logoColor=white)
 
-**Containerization:** Docker
+![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white)
 
 **Dataset:** [Credit Card Customers (Kaggle)](https://www.kaggle.com/datasets/sakshigoyal7/credit-card-customers)
 
