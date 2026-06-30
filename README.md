@@ -23,6 +23,9 @@ A full-stack analytics application that helps a bank identify customers at risk 
 
 **Dataset:** [Credit Card Customers (Kaggle)](https://www.kaggle.com/datasets/sakshigoyal7/credit-card-customers)
 
+## Live Demo
+https://credit-card-customer-churn-analytics.onrender.com/
+
 ## Deliverables
 
 | Module                | What it does                                                                        | Key outputs                                                                                                                                                |
