@@ -13,11 +13,12 @@ A full-stack analytics application that helps a bank identify customers at risk 
 ![Scikit--Learn](https://img.shields.io/badge/Scikit--Learn-F7931E?logo=scikitlearn&logoColor=white)
 ![XGBoost](https://img.shields.io/badge/XGBoost-1A1A1A?logo=xgboost&logoColor=white)
 ![SHAP](https://img.shields.io/badge/SHAP-FF6B6B?logo=python&logoColor=white)
+![Plotly](https://img.shields.io/badge/Plotly-3D4F71?logo=plotly&logoColor=white)
 
 ![React](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=black)
 ![Vite](https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?logo=tailwindcss&logoColor=white)
-![Plotly](https://img.shields.io/badge/Plotly-3D4F71?logo=plotly&logoColor=white)
+
 
 ![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white)
 
