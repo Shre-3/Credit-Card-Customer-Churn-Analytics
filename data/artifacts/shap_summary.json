@@ -1,0 +1,82 @@
+[
+  {
+    "feature": "numeric__Total_Trans_Ct",
+    "mean_abs_shap": 2.2187602519989014
+  },
+  {
+    "feature": "numeric__Total_Trans_Amt",
+    "mean_abs_shap": 1.0335129499435425
+  },
+  {
+    "feature": "numeric__Total_Revolving_Bal",
+    "mean_abs_shap": 0.8105721473693848
+  },
+  {
+    "feature": "numeric__Average_Transaction_Value",
+    "mean_abs_shap": 0.7791948914527893
+  },
+  {
+    "feature": "numeric__Total_Ct_Chng_Q4_Q1",
+    "mean_abs_shap": 0.49453654885292053
+  },
+  {
+    "feature": "numeric__Total_Amt_Chng_Q4_Q1",
+    "mean_abs_shap": 0.4417841136455536
+  },
+  {
+    "feature": "numeric__Total_Relationship_Count",
+    "mean_abs_shap": 0.33595985174179077
+  },
+  {
+    "feature": "numeric__Months_Inactive_12_mon",
+    "mean_abs_shap": 0.27794554829597473
+  },
+  {
+    "feature": "numeric__Service_Friction_Index",
+    "mean_abs_shap": 0.2564123868942261
+  },
+  {
+    "feature": "numeric__Customer_Age",
+    "mean_abs_shap": 0.19402480125427246
+  },
+  {
+    "feature": "numeric__Credit_Limit",
+    "mean_abs_shap": 0.08621741086244583
+  },
+  {
+    "feature": "numeric__Relationship_Depth_Per_Year",
+    "mean_abs_shap": 0.080061174929142
+  },
+  {
+    "feature": "numeric__Contacts_Count_12_mon",
+    "mean_abs_shap": 0.06935179978609085
+  },
+  {
+    "feature": "categorical__Marital_Status_Married",
+    "mean_abs_shap": 0.06811627000570297
+  },
+  {
+    "feature": "numeric__Avg_Open_To_Buy",
+    "mean_abs_shap": 0.06642613559961319
+  },
+  {
+    "feature": "categorical__Gender_F",
+    "mean_abs_shap": 0.06552843004465103
+  },
+  {
+    "feature": "numeric__Months_on_book",
+    "mean_abs_shap": 0.06551600247621536
+  },
+  {
+    "feature": "numeric__Balance_To_Limit_Ratio",
+    "mean_abs_shap": 0.04216527193784714
+  },
+  {
+    "feature": "numeric__Dependent_count",
+    "mean_abs_shap": 0.04101906344294548
+  },
+  {
+    "feature": "numeric__Avg_Utilization_Ratio",
+    "mean_abs_shap": 0.03719233348965645
+  }
+]
