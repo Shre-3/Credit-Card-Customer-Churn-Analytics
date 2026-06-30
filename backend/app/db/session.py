@@ -17,6 +17,7 @@ settings = get_settings()
 def build_database_url() -> str:
     if not settings.postgres_password or settings.postgres_password == "CHANGE_ME":
         raise ValueError("Set POSTGRES_PASSWORD in backend/.env before starting the API.")
+    query = {"sslmode": "require"} if "neon.tech" in settings.postgres_host else None
     return URL.create(
         drivername="postgresql+psycopg2",
         username=settings.postgres_user,
@@ -24,6 +25,7 @@ def build_database_url() -> str:
         host=settings.postgres_host,
         port=settings.postgres_port,
         database=settings.postgres_database,
+        query=query,
     ).render_as_string(hide_password=False)
 
 

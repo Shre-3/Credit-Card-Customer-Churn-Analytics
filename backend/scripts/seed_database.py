@@ -6,6 +6,8 @@ import pandas as pd
 
 sys.path.append(str(Path(__file__).resolve().parents[1]))
 
+from sqlalchemy import text
+
 from app.db.session import Base, SessionLocal, engine
 from app.models.customer import CustomerRecord
 from ml.constants import CSV_TO_SNAKE_COLUMN_MAP
@@ -49,23 +51,24 @@ def coerce_column_value(snake: str, value: object) -> object:
     return int(value)
 
 
-def build_record(row: pd.Series) -> CustomerRecord:
-    return CustomerRecord(
-        **{
-            snake: coerce_column_value(snake, row[csv_column])
-            for csv_column, snake in CSV_TO_SNAKE_COLUMN_MAP.items()
-        }
-    )
+def build_record_dict(row: pd.Series) -> dict:
+    return {
+        snake: coerce_column_value(snake, row[csv_column])
+        for csv_column, snake in CSV_TO_SNAKE_COLUMN_MAP.items()
+    }
 
 
 def main() -> None:
     args = parse_args()
     df = keep_dataset_columns(pd.read_csv(args.input))
+    records = [build_record_dict(row) for _, row in df.iterrows()]
 
     Base.metadata.create_all(bind=engine)
+    batch_size = 500
     with SessionLocal() as db:
-        for _, row in df.iterrows():
-            db.merge(build_record(row))
+        db.execute(text("TRUNCATE TABLE customer_records"))
+        for start in range(0, len(records), batch_size):
+            db.bulk_insert_mappings(CustomerRecord, records[start : start + batch_size])
         db.commit()
 
     print(f"Seeded {len(df)} customer records")

@@ -12,7 +12,7 @@ dist/
 
 # Environment
 .env
-*.env
+.env.*
 !.env.example
 
 # Data and model artifacts
