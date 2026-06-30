@@ -7,31 +7,33 @@ import { plotConfig, plotLayout } from "../utils/chart";
 
 export function BusinessImpactPage() {
   const [saveRate, setSaveRate] = useState(0.25);
-  const [revenuePerCustomer, setRevenuePerCustomer] = useState(450);
-  const [debouncedRevenue, setDebouncedRevenue] = useState(450);
+  const [revenueInput, setRevenueInput] = useState("450");
   const [impact, setImpact] = useState(null);
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  const loadImpact = (rate, revenue) => {
+    setLoading(true);
+    setError(null);
+
+    fetchBusinessImpact(rate, revenue)
+      .then(setImpact)
+      .catch(() => setError("Unable to load business impact. Seed the database first."))
+      .finally(() => setLoading(false));
+  };
 
   useEffect(() => {
-    const timer = window.setTimeout(() => setDebouncedRevenue(revenuePerCustomer), 400);
-    return () => window.clearTimeout(timer);
-  }, [revenuePerCustomer]);
+    loadImpact(0.25, 450);
+  }, []);
 
-  useEffect(() => {
-    let cancelled = false;
-
-    fetchBusinessImpact(saveRate, debouncedRevenue)
-      .then((data) => {
-        if (!cancelled) setImpact(data);
-      })
-      .catch(() => {
-        if (!cancelled) setError("Unable to load business impact. Seed the database first.");
-      });
-
-    return () => {
-      cancelled = true;
-    };
-  }, [saveRate, debouncedRevenue]);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const revenue = Number(revenueInput);
+    if (Number.isNaN(revenue) || revenue < 0) {
+      return;
+    }
+    loadImpact(saveRate, revenue);
+  };
 
   if (error) {
     return <div className="rounded-2xl bg-red-50 p-6 text-red-700">{error}</div>;
@@ -65,7 +67,7 @@ export function BusinessImpactPage() {
       </div>
 
       <div className="grid gap-6 xl:grid-cols-[0.8fr_1.2fr]">
-        <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+        <form className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm" onSubmit={handleSubmit}>
           <h3 className="text-lg font-semibold">Scenario Assumptions</h3>
           <label className="mt-5 block space-y-2 text-sm font-medium text-slate-700">
             <span>Intervention Save Rate: {Math.round(saveRate * 100)}%</span>
@@ -84,24 +86,26 @@ export function BusinessImpactPage() {
             <input
               className="w-full rounded-xl border border-slate-300 px-3 py-2 outline-none focus:border-cyan-500 focus:ring-2 focus:ring-cyan-100"
               min="0"
-              onChange={(event) => setRevenuePerCustomer(Number(event.target.value))}
+              onChange={(event) => setRevenueInput(event.target.value)}
               type="number"
-              value={revenuePerCustomer}
+              value={revenueInput}
             />
           </label>
+          <button
+            className="mt-5 w-full rounded-xl bg-cyan-600 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-cyan-700 disabled:cursor-not-allowed disabled:bg-cyan-300"
+            disabled={loading}
+            type="submit"
+          >
+            {loading ? "Updating..." : "Update scenario"}
+          </button>
           <ul className="mt-6 space-y-3 text-sm text-slate-600">
-            {impact.assumptions.map((assumption, index) => (
+            {impact.assumptions.map((assumption) => (
               <li className="rounded-xl bg-slate-50 p-3" key={assumption}>
-                {index === 2
-                  ? `Average annual revenue at risk per customer: $${debouncedRevenue.toLocaleString(undefined, {
-                      minimumFractionDigits: 2,
-                      maximumFractionDigits: 2,
-                    })}.`
-                  : assumption}
+                {assumption}
               </li>
             ))}
           </ul>
-        </div>
+        </form>
 
         <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
           <h3 className="text-lg font-semibold">Revenue Scenario</h3>
