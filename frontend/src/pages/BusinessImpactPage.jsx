@@ -8,14 +8,30 @@ import { plotConfig, plotLayout } from "../utils/chart";
 export function BusinessImpactPage() {
   const [saveRate, setSaveRate] = useState(0.25);
   const [revenuePerCustomer, setRevenuePerCustomer] = useState(450);
+  const [debouncedRevenue, setDebouncedRevenue] = useState(450);
   const [impact, setImpact] = useState(null);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetchBusinessImpact(saveRate, revenuePerCustomer)
-      .then(setImpact)
-      .catch(() => setError("Unable to load business impact. Seed the database first."));
-  }, [saveRate, revenuePerCustomer]);
+    const timer = window.setTimeout(() => setDebouncedRevenue(revenuePerCustomer), 400);
+    return () => window.clearTimeout(timer);
+  }, [revenuePerCustomer]);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    fetchBusinessImpact(saveRate, debouncedRevenue)
+      .then((data) => {
+        if (!cancelled) setImpact(data);
+      })
+      .catch(() => {
+        if (!cancelled) setError("Unable to load business impact. Seed the database first.");
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [saveRate, debouncedRevenue]);
 
   if (error) {
     return <div className="rounded-2xl bg-red-50 p-6 text-red-700">{error}</div>;
@@ -74,9 +90,14 @@ export function BusinessImpactPage() {
             />
           </label>
           <ul className="mt-6 space-y-3 text-sm text-slate-600">
-            {impact.assumptions.map((assumption) => (
+            {impact.assumptions.map((assumption, index) => (
               <li className="rounded-xl bg-slate-50 p-3" key={assumption}>
-                {assumption}
+                {index === 2
+                  ? `Average annual revenue at risk per customer: $${debouncedRevenue.toLocaleString(undefined, {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2,
+                    })}.`
+                  : assumption}
               </li>
             ))}
           </ul>
