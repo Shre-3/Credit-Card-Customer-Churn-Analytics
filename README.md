@@ -2,6 +2,15 @@
 
 A full-stack analytics application that helps a bank identify customers at risk of churning, understand what drives attrition, and estimate the business impact of retention efforts.
 
+## Analysts can:
+
+- Predict high-risk customers via SHAP drivers and receive retention recommendations in real time
+- Analyze income loss and savings by customizing "Revenue at Risk per Customer" and adjust "Save Rate" to understand business impact
+- View client details at large (who churned and who is still with the company)
+- Observe overall behavior of attrited and existing customers
+- View the model's specifics to understand why results are displayed as such
+
+
 ## Tech Stack
 
 ![Python](https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white)
